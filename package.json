@@ -1,0 +1,62 @@
+{
+  "name": "indec-mcp",
+  "version": "0.1.0",
+  "description": "Servidor MCP (Model Context Protocol) para la API oficial del INDEC (api.indec.gob.ar): IPC, canastas, salarios, EMAE, pobreza, comercio exterior y más, para agentes de IA. Proyecto no oficial.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "indec-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "docs/openapi.snapshot.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "gen": "tsx scripts/gen-from-openapi.ts",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "prepare": "npm run build",
+    "smoke": "node scripts/smoke-stdio.mjs",
+    "e2e": "node scripts/e2e.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.0"
+  },
+  "author": "Santino Spingola",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SantinoSpingola/indec-mcp.git"
+  },
+  "homepage": "https://github.com/SantinoSpingola/indec-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/SantinoSpingola/indec-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "indec",
+    "argentina",
+    "estadisticas",
+    "inflacion",
+    "ipc",
+    "datos-abiertos",
+    "claude",
+    "ai-agents"
+  ]
+}
