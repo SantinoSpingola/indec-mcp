@@ -20,31 +20,7 @@ Cubre los **19 datasets** de la API: IPC, canastas (CBA/CBT y de crianza), salar
 
 ## Instalación
 
-No hace falta clonar nada: los clientes MCP lo ejecutan con `npx` directamente desde GitHub (la primera vez compila, tarda un minuto).
-
-### Claude Desktop / Cursor
-
-Agregá esto a la configuración de servidores MCP (en Claude Desktop: *Settings → Developer → Edit Config*):
-
-```json
-{
-  "mcpServers": {
-    "indec": {
-      "command": "npx",
-      "args": ["-y", "github:SantinoSpingola/indec-mcp"],
-      "env": { "INDEC_API_TOKEN": "tu_token_jwt" }
-    }
-  }
-}
-```
-
-### Claude Code
-
-```bash
-claude mcp add indec --env INDEC_API_TOKEN=tu_token_jwt -- npx -y github:SantinoSpingola/indec-mcp
-```
-
-### Desde el código fuente
+### Opción A: desde el código fuente (funciona con cualquier versión de npm)
 
 ```bash
 git clone https://github.com/SantinoSpingola/indec-mcp.git
@@ -52,7 +28,41 @@ cd indec-mcp
 npm install        # compila solo (script `prepare`)
 ```
 
-y apuntá tu cliente a `node /ruta/a/indec-mcp/dist/index.js`.
+Después apuntá tu cliente MCP a `dist/index.js`. En **Claude Desktop** o **Cursor** (*Settings → Developer → Edit Config* en Claude Desktop):
+
+```json
+{
+  "mcpServers": {
+    "indec": {
+      "command": "node",
+      "args": ["/ruta/absoluta/a/indec-mcp/dist/index.js"],
+      "env": { "INDEC_API_TOKEN": "tu_token_jwt" }
+    }
+  }
+}
+```
+
+En **Claude Code**:
+
+```bash
+claude mcp add indec --env INDEC_API_TOKEN=tu_token_jwt -- node /ruta/absoluta/a/indec-mcp/dist/index.js
+```
+
+### Opción B: directo desde GitHub con `npx` (sin clonar)
+
+```json
+{
+  "mcpServers": {
+    "indec": {
+      "command": "npx",
+      "args": ["--allow-git=all", "-y", "github:SantinoSpingola/indec-mcp"],
+      "env": { "INDEC_API_TOKEN": "tu_token_jwt" }
+    }
+  }
+}
+```
+
+La primera vez compila y tarda un minuto. `--allow-git=all` hace falta desde **npm 12**, que por seguridad ya no descarga paquetes desde git por defecto; con npm 10 u 11 podés omitirlo. Si preferís no habilitarlo, usá la opción A.
 
 > **Tu token es personal.** Ponelo solo en la variable de entorno de tu cliente MCP; el servidor nunca lo escribe en logs ni en las respuestas.
 
