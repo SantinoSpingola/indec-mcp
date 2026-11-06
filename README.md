@@ -20,22 +20,16 @@ Cubre los **19 datasets** de la API: IPC, canastas (CBA/CBT y de crianza), salar
 
 ## Instalación
 
-### Opción A: desde el código fuente (funciona con cualquier versión de npm)
+### Opción A: desde npm (la más simple)
 
-```bash
-git clone https://github.com/SantinoSpingola/indec-mcp.git
-cd indec-mcp
-npm install        # compila solo (script `prepare`)
-```
-
-Después apuntá tu cliente MCP a `dist/index.js`. En **Claude Desktop** o **Cursor** (*Settings → Developer → Edit Config* en Claude Desktop):
+En **Claude Desktop** o **Cursor** (en Claude Desktop: *Settings → Developer → Edit Config*):
 
 ```json
 {
   "mcpServers": {
     "indec": {
-      "command": "node",
-      "args": ["/ruta/absoluta/a/indec-mcp/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "indec-mcp"],
       "env": { "INDEC_API_TOKEN": "tu_token_jwt" }
     }
   }
@@ -45,24 +39,22 @@ Después apuntá tu cliente MCP a `dist/index.js`. En **Claude Desktop** o **Cur
 En **Claude Code**:
 
 ```bash
-claude mcp add indec --env INDEC_API_TOKEN=tu_token_jwt -- node /ruta/absoluta/a/indec-mcp/dist/index.js
+claude mcp add indec --env INDEC_API_TOKEN=tu_token_jwt -- npx -y indec-mcp
 ```
 
-### Opción B: directo desde GitHub con `npx` (sin clonar)
+### Opción B: desde el código fuente
 
-```json
-{
-  "mcpServers": {
-    "indec": {
-      "command": "npx",
-      "args": ["--allow-git=all", "-y", "github:SantinoSpingola/indec-mcp"],
-      "env": { "INDEC_API_TOKEN": "tu_token_jwt" }
-    }
-  }
-}
+```bash
+git clone https://github.com/SantinoSpingola/indec-mcp.git
+cd indec-mcp
+npm install        # compila solo (script `prepare`)
 ```
 
-La primera vez compila y tarda un minuto. `--allow-git=all` hace falta desde **npm 12**, que por seguridad ya no descarga paquetes desde git por defecto; con npm 10 u 11 podés omitirlo. Si preferís no habilitarlo, usá la opción A.
+Después apuntá tu cliente MCP a `node /ruta/absoluta/a/indec-mcp/dist/index.js` (mismo bloque `mcpServers` de arriba, con `"command": "node"` y esa ruta en `args`).
+
+### Opción C: directo desde GitHub con `npx`
+
+`"args": ["--allow-git=all", "-y", "github:SantinoSpingola/indec-mcp"]` en el bloque de arriba. La primera vez compila y tarda un minuto. `--allow-git=all` hace falta desde **npm 12**, que por seguridad ya no descarga paquetes desde git por defecto; con npm 10 u 11 podés omitirlo.
 
 > **Tu token es personal.** Ponelo solo en la variable de entorno de tu cliente MCP; el servidor nunca lo escribe en logs ni en las respuestas.
 
