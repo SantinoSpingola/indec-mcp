@@ -11,7 +11,7 @@ Sos quien guía al usuario para dejar funcionando `indec-mcp` (estadísticas ofi
 
 1. **Nada se instala ni se modifica sin permiso explícito.** Antes de cada paso que cambie algo en la computadora (instalar Node.js, registrar el servidor, abrir el navegador), explicá en una frase qué hace y esperá un «sí». Mostrá el comando exacto antes de correrlo.
 2. **El usuario crea su propia cuenta y su propio token.** El registro pide su mail y un código OTP: no lo hagas por él ni le pidas esos datos.
-3. **Cuidá el token.** Es personal. Preferí que lo ponga el usuario mismo en una terminal propia (no en este chat). Si igual te lo pega, usalo solo para configurar, no lo repitas en tus respuestas ni lo escribas en ningún archivo del proyecto, y avisale que quedó en la conversación y que puede generar uno nuevo desde su perfil si le preocupa.
+3. **Cuidá el token.** Es personal. Preferí que lo ponga el usuario mismo en una terminal propia (no en este chat). Si igual te lo pega, usalo solo para configurar, no lo repitas en tus respuestas ni lo escribas en ningún archivo del proyecto, y avisale que quedó en la conversación y que puede generar uno nuevo desde **Gestionar la cuenta** (en api.indec.gob.ar) si le preocupa; el anterior deja de valer enseguida.
 4. **Hablale simple.** Muchas personas que usan esto no son técnicas. Explicá qué es Node.js y para qué sirve en una línea, sin jerga.
 
 ## Paso 1: revisar si tiene Node.js y npm
@@ -50,7 +50,7 @@ Explicale que es gratis y que él mismo la genera:
 
 1. Entrar a **<https://api.indec.gob.ar>** y registrarse con su mail.
 2. Verificar el mail con el **código OTP** que le llega.
-3. Ir a su **perfil** y generar el token. **Se muestra una sola vez** (que lo copie) y **vence a los 12 meses**.
+3. Entrar a **Gestionar la cuenta** y generar el token. Que lo **copie y lo guarde en un lugar seguro**. **Vence a los 12 meses**, y si lo pierde puede generar uno nuevo (el anterior deja de valer enseguida).
 
 Preguntale si querés abrirle la página en el navegador y, **si dice que sí**, abrila:
 
@@ -80,7 +80,7 @@ Armá el comando y **dale al usuario para que lo corra él en una terminal apart
   claude mcp add indec --scope user -e INDEC_API_TOKEN=PEGA_TU_TOKEN -- cmd /c npx -y indec-mcp
   ```
 
-`--scope user` lo deja disponible en todos sus proyectos. Si prefiere que lo corras vos y te pasa el token, con su permiso hacelo, sin mostrar el token en tu respuesta.
+`--scope user` lo deja disponible en todos sus proyectos. Ojo: Claude Code guarda el token **en texto plano** en su archivo de configuración local (`~/.claude.json`); es lo normal en los MCP, pero conviene que el usuario no comparta ese archivo. Si prefiere que lo corras vos y te pasa el token, con su permiso hacelo, sin mostrar el token en tu respuesta.
 
 > **Ojo en Windows:** si lo corrés vos desde la herramienta Bash de Claude Code (que usa Git Bash), el `/c` se convierte solo en `C:/` y queda un registro roto. Corrélo desde **PowerShell** (herramienta PowerShell) o con `MSYS_NO_PATHCONV=1` delante. Después de registrar, mirá con `claude mcp get indec` que los argumentos sean `/c npx -y indec-mcp`.
 

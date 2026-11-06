@@ -16,7 +16,7 @@ Cubre los **19 datasets** de la API: IPC, canastas (CBA/CBT y de crianza), salar
 ## Requisitos
 
 - Node.js ≥ 20
-- Un **token JWT** de la API del INDEC (gratis): registrate en <https://api.indec.gob.ar>, verificá el mail con el código OTP y generalo desde tu perfil. Se muestra una sola vez y vence a los 12 meses.
+- Un **token JWT** de la API del INDEC (gratis): registrate en <https://api.indec.gob.ar>, verificá el mail con el código de verificación y generá el token desde **Gestionar la cuenta**. Copialo y guardalo en un lugar seguro. Vence a los 12 meses, y si lo perdés o deja de andar podés generar uno nuevo (el anterior deja de ser válido enseguida).
 
 ## Instalación asistida por tu agente (Claude Code)
 
@@ -127,6 +127,7 @@ También expone *resources* (`indec://catalogo`, `indec://dataset/{id}`, `indec:
 - La API del INDEC está en **BETA**: puede cambiar sin aviso. El script de verificación y `indec_status` ayudan a detectarlo.
 - Los totales calculados por `indec_aggregate` y `indec_comercio_exterior` son sumas de las filas publicadas y pueden diferir levemente de los informes técnicos del INDEC (redondeo, datos confidenciales).
 - El servidor **no interpreta ni valida económicamente** los datos: son lo que publica el INDEC.
+- **Límites de uso del INDEC:** la API tiene límites según el tipo de cuenta, que el INDEC no detalla en sus términos. Para ser un buen usuario, el servidor guarda las respuestas en caché (1 hora por defecto), reintenta con espera creciente y limita cuántas filas recorre: `indec_aggregate` hasta 50.000 por consulta (`max_rows`) y `indec_comercio_exterior` hasta 200.000, avisando cuando el resultado es parcial. Si una consulta es muy grande, acotala con filtros.
 
 ## Desarrollo
 
@@ -145,7 +146,9 @@ Los tests de CI no usan el token: la API se simula (el `smoke` solo consulta el 
 
 ## Datos y atribución
 
-Los datos son del **INDEC** (<https://www.indec.gob.ar>), obtenidos de su API pública. Revisá los [términos de la API](https://api.indec.gob.ar/ayuda/terminos) antes de redistribuir datos y citá siempre la fuente. Este proyecto no está afiliado al INDEC ni cuenta con su respaldo.
+Los datos son del **INDEC** (<https://www.indec.gob.ar>), obtenidos de su API pública. Revisá los [términos de la API](https://api.indec.gob.ar/ayuda/terminos) antes de redistribuir datos.
+
+**Cómo citar:** el INDEC pide citar la fuente de forma clara y visible, con el formato **«Fuente: INDEC»** más el servicio de datos consultado, por ejemplo *«Fuente: INDEC, IPC nacional»*. Cada respuesta de este servidor trae el campo `dataset` con el servicio consultado para armar esa cita. Este proyecto no está afiliado al INDEC ni cuenta con su respaldo.
 
 ## Seguridad
 

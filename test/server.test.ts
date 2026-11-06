@@ -133,6 +133,13 @@ describe("servidor MCP", () => {
     expect(calls[1]!.url.searchParams.get("periodo")).toBe("eq.202610");
   });
 
+  it("indec_aggregate rechaza un max_rows que saturaría la API (tope 50.000)", async () => {
+    const { call } = await connect({});
+    const r = await call("indec_aggregate", { dataset: "comercio_exterior_exportacion_bienes", group_by: ["Anio"], max_rows: 60000 });
+    expect(r.isError).toBe(true);
+    expect(r.text).toMatch(/50000|max_rows/);
+  });
+
   it("indec_aggregate suma y ordena por valor descendente", async () => {
     const { call, calls } = await connect({
       comercio_exterior_exportacion_bienes: () => ({

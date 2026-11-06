@@ -151,7 +151,7 @@ export function registerGenericTools(server: McpServer, client: IndecClient): vo
         group_by: z.array(z.string()).default([]).describe("Columnas de agrupación. Vacío = un único total."),
         value_column: z.string().optional().describe("Columna numérica a agregar (no hace falta con agg='count')."),
         agg: z.enum(["sum", "avg", "min", "max", "count"]).default("sum"),
-        max_rows: z.number().int().min(1).max(200000).default(20000).describe("Tope de filas a recorrer."),
+        max_rows: z.number().int().min(1).max(50000).default(20000).describe("Tope de filas a recorrer (máximo 50.000, para no saturar la API del INDEC)."),
         max_groups: z.number().int().min(1).max(500).default(100).describe("Tope de grupos devueltos (ordenados por valor desc)."),
       },
       annotations: SOLO_LECTURA,
