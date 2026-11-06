@@ -1,6 +1,6 @@
 {
   "name": "indec-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Servidor MCP (Model Context Protocol) para la API oficial del INDEC (api.indec.gob.ar): IPC, canastas, salarios, EMAE, pobreza, comercio exterior y más, para agentes de IA. Proyecto no oficial.",
   "type": "module",
   "license": "MIT",

@@ -7,7 +7,7 @@
       "name": "indec-mcp",
       "source": "./",
       "description": "Skill que instala y configura el MCP del INDEC paso a paso: Node.js, API key, registro y verificación.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "license": "MIT"
     }
   ]

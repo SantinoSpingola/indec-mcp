@@ -1,7 +1,7 @@
 {
   "name": "indec-mcp",
   "description": "Guía a tu agente para instalar y configurar el MCP del INDEC (estadísticas oficiales de Argentina): revisa Node.js, pide permiso antes de instalar, te lleva a conseguir tu API key y verifica que funcione.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": { "name": "Santino Spingola", "url": "https://github.com/SantinoSpingola" },
   "homepage": "https://github.com/SantinoSpingola/indec-mcp",
   "repository": "https://github.com/SantinoSpingola/indec-mcp",
