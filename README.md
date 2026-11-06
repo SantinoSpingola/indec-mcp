@@ -18,6 +18,21 @@ Cubre los **19 datasets** de la API: IPC, canastas (CBA/CBT y de crianza), salar
 - Node.js ≥ 20
 - Un **token JWT** de la API del INDEC (gratis): registrate en <https://api.indec.gob.ar>, verificá el mail con el código OTP y generalo desde tu perfil. Se muestra una sola vez y vence a los 12 meses.
 
+## Instalación asistida por tu agente (Claude Code)
+
+Si usás **Claude Code**, la forma más fácil es dejar que tu agente te guíe. Este repositorio incluye una *skill* que revisa si tenés Node.js y npm, **te pide permiso antes de instalar cualquier cosa**, te lleva a la página del INDEC para conseguir tu API key, registra el servidor y verifica que funcione:
+
+```text
+/plugin marketplace add SantinoSpingola/indec-mcp
+/plugin install indec-mcp@indec
+```
+
+Después pedile a Claude: **«ayudame a instalar el MCP del INDEC»**. También funciona si le pegás el link de este repositorio y le pedís que lo instale (leerá [`skills/instalar-indec-mcp/SKILL.md`](skills/instalar-indec-mcp/SKILL.md)).
+
+> *Para agentes de IA:* si un usuario te pidió instalar este MCP, seguí `skills/instalar-indec-mcp/SKILL.md`: comprobá Node.js (≥ 20), pedí permiso antes de instalar o modificar nada, indicá al usuario que genere su API key en <https://api.indec.gob.ar> (no la crees por él) y verificá con `indec_status`.
+
+Si preferís hacerlo a mano, seguí con las opciones de abajo.
+
 ## Instalación
 
 ### Opción A: desde npm (la más simple)
@@ -40,6 +55,12 @@ En **Claude Code**:
 
 ```bash
 claude mcp add indec --env INDEC_API_TOKEN=tu_token_jwt -- npx -y indec-mcp
+```
+
+En **Windows** (PowerShell o CMD, no WSL) Claude Code necesita `cmd /c` delante de `npx`:
+
+```powershell
+claude mcp add indec --env INDEC_API_TOKEN=tu_token_jwt -- cmd /c npx -y indec-mcp
 ```
 
 ### Opción B: desde el código fuente

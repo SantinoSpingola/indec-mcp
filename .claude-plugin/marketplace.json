@@ -1,0 +1,14 @@
+{
+  "name": "indec",
+  "owner": { "name": "Santino Spingola", "url": "https://github.com/SantinoSpingola" },
+  "metadata": { "description": "Herramientas para usar las estadísticas oficiales del INDEC (Argentina) con agentes de IA. Proyecto no oficial." },
+  "plugins": [
+    {
+      "name": "indec-mcp",
+      "source": "./",
+      "description": "Skill que instala y configura el MCP del INDEC paso a paso: Node.js, API key, registro y verificación.",
+      "version": "0.1.0",
+      "license": "MIT"
+    }
+  ]
+}
